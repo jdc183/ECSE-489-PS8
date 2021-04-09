@@ -1,6 +1,6 @@
 %simulation of 2DOF arm dynamics
 %coerce path along x=-1 to x=+1 at y=0.2
-% clear all
+clear all
 tau_vec_max = [10;5]
 qdot_vec_max = [1;2]
 a_vec = [1;1]; %link lengths
@@ -15,7 +15,7 @@ DT=0.001
 
 %IMPORTANT: EDIT plan_xy_velocities() to put in a viable and desirable plan
 %in terms of vx(t) (with vy(t)=0, for this example)
-v_xy_plan = plan_xy_velocities(DT,hand_xy_start,hand_xy_end,qdot_vec_max,a_vec,tau_vec_max)
+%v_xy_plan = plan_xy_velocities(DT,hand_xy_start,hand_xy_end,qdot_vec_max,a_vec,tau_vec_max)
 [dummy,npts]=size(v_xy_plan)
 accel_xy_plan = accel_from_vel_plan(v_xy_plan,DT);
 hand_xy_plan = hand_xy_from_v_xy(hand_xy_start,v_xy_plan,DT);

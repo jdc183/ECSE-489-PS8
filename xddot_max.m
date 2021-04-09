@@ -2,6 +2,14 @@
 %this function is not completed--only outlined
 
 function [x_acc_min,x_acc_max] = xddot_max (q_vec, qdot_vec,a_vec,tau_max_vec)
+% global Q QDOT A TAU_MAX
+% Q = q_vec;
+% QDOT = qdot_vec;
+% A = a_vec;
+% TAU_MAX = tau_max_vec;
+% 
+% x_acc_max = abs(fminunc(@tau_max_err,1));
+% x_acc_min = -x_acc_max;
 %tau = H qddot + C qdot
 %qddot = J_inv*vdot - J_inv*Jdot*qdot
 %tau = -H*J_inv*Jdot*qdot + C*qdot + H*J_inv*[1;0]*ax
@@ -53,10 +61,17 @@ while err > 0.01 && i < 50
     end
 end
 
-x_acc_max = test*.9;
-x_acc_min = -test*.9;
+x_acc_max = min(11,test*.95);
+x_acc_min = max(-11,-test*.95);
 
 end
+
+% function err = tau_max_err(x_acc)
+%     global Q QDOT A TAU_MAX
+%     qddot_vec = compute_qddot_vecs ([x_acc;0],Q,QDOT,A,.001);
+%     [tau,~,~] = inv_dyn_2DOF (qddot_vec,QDOT,Q,A,[0;0]);
+%     err = min(abs(abs(tau) - abs(TAU_MAX)));
+% end
 % % tau_max_vec = dot(tau,tau_max_vec)*tau;
 % 
 % 
